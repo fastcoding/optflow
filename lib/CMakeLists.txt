@@ -47,9 +47,11 @@ SET(SRCS "DenseImageMorpher.cpp"
          "SparseVectorFieldIO.cpp"
          "VectorFieldIllustrator.cpp")
 
-INCLUDE_DIRECTORIES(.)
+INCLUDE_DIRECTORIES(. )
 
 ADD_LIBRARY(optflow SHARED ${SRCS})
+
+TARGET_LINK_LIBRARIES(optflow ${LIBS})
 
 INSTALL(TARGETS optflow LIBRARY DESTINATION lib)
 

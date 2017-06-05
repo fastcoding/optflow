@@ -51,9 +51,13 @@ void LucasKanadeOpenCV::compute(const CImg< unsigned char > &I1,
   
   I1_cv = cvCreateImageHeader(cvSize(W, H), IPL_DEPTH_8U, 1);
   I2_cv = cvCreateImageHeader(cvSize(W, H), IPL_DEPTH_8U, 1);
-  
+#if CV_VERSION_MAJOR<3
   cvSetImageData(I1_cv, I1.data, W * sizeof(unsigned char));
   cvSetImageData(I2_cv, I2.data, W * sizeof(unsigned char));
+#else
+  cvSetData(I1_cv, I1.data, W * sizeof(unsigned char));
+  cvSetData(I2_cv, I2.data, W * sizeof(unsigned char));
+#endif
   
   eigImage = cvCreateImage(cvSize(W, H), IPL_DEPTH_32F, 1);
   tmpImage = cvCreateImage(cvSize(W, H), IPL_DEPTH_32F, 1);
